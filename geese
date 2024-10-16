@@ -1,0 +1,161 @@
+import random  
+  
+class Goose:  
+   def __init__(self, name, health, damage):  
+      self.name = name  
+      self.health = health  
+      self.damage = damage  
+  
+class ShieldGoose(Goose):  
+   def __init__(self):  
+      super().__init__("Shield Goose", 10, 2)  
+  
+   def attack(self, other):  
+      other.health -= self.damage  
+      if other.health <= 0:  
+        print(f"{other.name} has been defeated!")  
+      else:  
+        print(f"{other.name} has {other.health} health remaining.")  
+  
+   def defend(self, damage):  
+      self.health -= damage  
+      if self.health <= 0:  
+        print(f"{self.name} has been defeated!")  
+      else:  
+        print(f"{self.name} has {self.health} health remaining.")  
+  
+   def retaliate(self, damage):  
+      return damage / 2  
+  
+class IceGoose(Goose):  
+   def __init__(self):  
+      super().__init__("Ice Goose", 5, 2)  
+  
+   def attack(self, other):  
+      other.health -= self.damage  
+      if other.health <= 0:  
+        print(f"{other.name} has been defeated!")  
+      else:  
+        print(f"{other.name} has {other.health} health remaining.")  
+  
+   def defend(self, damage):  
+      self.health -= damage  
+      if self.health <= 0:  
+        print(f"{self.name} has been defeated!")  
+      else:  
+        print(f"{self.name} has {self.health} health remaining.")  
+  
+   def freeze(self, other):  
+      if random.random() < 0.5:  
+        print(f"{other.name} has been frozen and cannot act this turn!")  
+        return True  
+      else:  
+        return False  
+  
+class BasicGoose(Goose):  
+   def __init__(self):  
+      super().__init__("Basic Goose", 1, 1)  
+  
+   def attack(self, other):  
+      other.health -= self.damage  
+      if other.health <= 0:  
+        print(f"{other.name} has been defeated!")  
+      else:  
+        print(f"{other.name} has {other.health} health remaining.")  
+  
+class CrippledGoose(Goose):  
+   def __init__(self):  
+      super().__init__("Crippled Goose", 10, 1)  
+  
+   def attack(self, other):  
+      other.health -= self.damage  
+      if other.health <= 0:  
+        print(f"{other.name} has been defeated!")  
+      else:  
+        print(f"{other.name} has {other.health} health remaining.")  
+  
+   def defend(self, damage):  
+      self.health -= damage * 0.6  
+      if self.health <= 0:  
+        print(f"{self.name} has been defeated!")  
+      else:  
+        print(f"{self.name} has {self.health} health remaining.")  
+  
+class FireGoose(Goose):  
+   def __init__(self):  
+      super().__init__("Fire Goose", 10, 4)  
+  
+   def attack(self, other):  
+      other.health -= self.damage  
+      if random.random() < 0.2:  
+        other.health -= 3  
+        print(f"{other.name} has been hit with a critical strike!")  
+      if other.health <= 0:  
+        print(f"{other.name} has been defeated!")  
+      else:  
+        print(f"{other.name} has {other.health} health remaining.")  
+  
+class MedicGoose(Goose):  
+   def __init__(self):  
+      super().__init__("Medic Goose", 5, 0)  
+  
+   def heal(self, goose):  
+      goose.health += goose.health * 0.1  
+      print(f"{goose.name} has been healed for {goose.health * 0.1} health.")  
+  
+class BombShelterGoose(Goose):  
+   def __init__(self):  
+      super().__init__("Bomb Shelter Goose", 0, 0)  
+  
+   def protect(self, goose):  
+      print(f"{goose.name} has been protected from damage for 1 turn.")  
+  
+class RichGoose(Goose):  
+   def __init__(self):  
+      super().__init__("Rich Goose", 15, 1)  
+  
+   def steal(self, goose):  
+      print(f"{goose.name} has been stolen!")  
+  
+class StormGoose(Goose):  
+   def __init__(self):  
+      super().__init__("Storm Goose", 20, 0)  
+  
+   def attack(self, other):  
+      if random.random() < 0.05:  
+        print(f"{other.name} has been instantly killed!")  
+        other.health = 0  
+      else:  
+        print(f"{other.name} has {other.health} health remaining.")  
+  
+class ThermonuclearGoose(Goose):  
+   def __init__(self):  
+      super().__init__("Thermonuclear Goose", 1, 4)  
+  
+   def attack(self, other):  
+      other.health -= self.damage  
+      if other.health <= 0:  
+        print(f"{other.name} has been defeated!")  
+      else:  
+        print(f"{other.name} has {other.health} health remaining.")  
+  
+   def thermonuclear(self):  
+      for goose in game.geese:  
+        if goose != self:  
+           goose.health -= 999  
+           print(f"{goose.name} has been hit with a thermonuclear blast!")  
+  
+class CorruptedGoose(Goose):  
+   def __init__(self):  
+      super().__init__("Corrupted Goose", 20, 2)  
+  
+   def attack(self, other):  
+      other.health -= self.damage  
+      if other.health <= 0:  
+        print(f"{other.name} has been defeated!")  
+      else:  
+        print(f"{other.name} has {other.health} health remaining.")  
+  
+   def corrupt(self):  
+      self.damage += 2 * (self.health - self.health)  
+      print(f"{self.name} has been corrupted and now deals {self.damage} damage.")  
